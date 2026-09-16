@@ -1,0 +1,41 @@
+[experiment]
+name = "unsw_nb15_binary_opt_feature_smoke"
+seed = 42
+output_dir = "runs/binary_opt_feature_smoke"
+
+[data]
+dataset = "unsw_nb15"
+task = "binary"
+train_path = "data/raw/UNSW_NB15_training-set.csv"
+test_path = "data/raw/UNSW_NB15_testing-set.csv"
+validation_size = 0.15
+apply_smote = false
+smote_method = "none"
+split_indices_path = "data/processed/splits/multiclass_stratified_seed42_val015.npz"
+log_transform = true
+save_preprocessor = true
+preprocessor_path = "data/processed/preprocessors/binary_preprocessor.joblib"
+
+[model]
+name = "feature_ms_cnn_bilstm_attention"
+conv_channels = 8
+kernel_sizes = [3, 5]
+lstm_hidden = 16
+lstm_layers = 1
+attention_heads = 4
+dense_hidden = 16
+dropout = 0.20
+
+[training]
+epochs = 1
+batch_size = 128
+learning_rate = 0.001
+weight_decay = 0.0
+optimizer = "adam"
+loss = "focal"
+early_stopping_patience = 1
+threshold_strategy = "binary_macro_f1"
+threshold_min_normal_recall = 0.0
+max_train_samples = 2048
+max_val_samples = 1024
+max_test_samples = 1024

@@ -1,0 +1,35 @@
+[experiment]
+name = "unsw_nb15_binary_cnn"
+seed = 42
+output_dir = "runs/binary_cnn"
+
+[data]
+dataset = "unsw_nb15"
+task = "binary"
+train_path = "data/raw/UNSW_NB15_training-set.csv"
+test_path = "data/raw/UNSW_NB15_testing-set.csv"
+validation_size = 0.15
+apply_smote = false
+smote_method = "none"
+split_indices_path = "data/processed/splits/multiclass_stratified_seed42_val015.npz"
+log_transform = true
+save_preprocessor = true
+preprocessor_path = "data/processed/preprocessors/binary_preprocessor.joblib"
+
+[model]
+name = "cnn"
+conv_channels = 64
+kernel_sizes = [3]
+lstm_hidden = 128
+lstm_layers = 1
+attention_heads = 4
+dense_hidden = 64
+dropout = 0.30
+
+[training]
+epochs = 30
+batch_size = 256
+learning_rate = 0.001
+weight_decay = 0.0001
+loss = "weighted_cross_entropy"
+early_stopping_patience = 6

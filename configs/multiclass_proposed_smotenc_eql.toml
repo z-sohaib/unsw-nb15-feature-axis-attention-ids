@@ -1,0 +1,36 @@
+[experiment]
+name = "unsw_nb15_multiclass_proposed_smotenc_eql"
+seed = 42
+output_dir = "runs/multiclass_proposed_smotenc_eql"
+
+[data]
+dataset = "unsw_nb15"
+task = "multiclass"
+train_path = "data/raw/UNSW_NB15_training-set.csv"
+test_path = "data/raw/UNSW_NB15_testing-set.csv"
+validation_size = 0.15
+apply_smote = true
+smote_method = "smotenc"
+smote_target_count = 6000
+split_indices_path = "data/processed/splits/multiclass_stratified_seed42_val015.npz"
+log_transform = true
+save_preprocessor = true
+preprocessor_path = "data/processed/preprocessors/multiclass_preprocessor.joblib"
+
+[model]
+name = "ms_cnn_bilstm_attention"
+conv_channels = 64
+kernel_sizes = [3, 5, 7]
+lstm_hidden = 128
+lstm_layers = 1
+attention_heads = 4
+dense_hidden = 64
+dropout = 0.30
+
+[training]
+epochs = 40
+batch_size = 256
+learning_rate = 0.001
+weight_decay = 0.0001
+loss = "eql_v2"
+early_stopping_patience = 8

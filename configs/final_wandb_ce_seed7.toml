@@ -1,0 +1,38 @@
+[experiment]
+name = "unsw_nb15_final_wandb_ce_seed7"
+seed = 7
+output_dir = "runs/final_wandb_ce_seed7"
+
+[data]
+dataset = "unsw_nb15"
+task = "multiclass"
+train_path = "data/raw/UNSW_NB15_training-set.csv"
+test_path = "data/raw/UNSW_NB15_testing-set.csv"
+validation_size = 0.15
+apply_smote = false
+smote_method = "none"
+split_indices_path = "data/processed/splits/multiclass_stratified_seed42_val015.npz"
+log_transform = true
+save_preprocessor = true
+preprocessor_path = "data/processed/preprocessors/multiclass_preprocessor.joblib"
+
+[model]
+name = "feature_ms_cnn_bilstm_attention"
+conv_channels = 48
+kernel_sizes = [3, 7, 9]
+lstm_hidden = 160
+lstm_layers = 2
+attention_heads = 2
+dense_hidden = 96
+dropout = 0.39003534601760614
+
+[training]
+epochs = 60
+batch_size = 64
+learning_rate = 0.000848221425953241
+weight_decay = 0.00017954338254187955
+optimizer = "adamw"
+loss = "cross_entropy"
+early_stopping_patience = 15
+label_smoothing = 0.02
+validation_selection_metric = "weighted_f1"

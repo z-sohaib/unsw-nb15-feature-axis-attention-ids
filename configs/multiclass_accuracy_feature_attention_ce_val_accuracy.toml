@@ -1,0 +1,37 @@
+[experiment]
+name = "unsw_nb15_multiclass_accuracy_feature_attention_ce_val_accuracy"
+seed = 42
+output_dir = "runs/multiclass_accuracy_feature_attention_ce_val_accuracy"
+
+[data]
+dataset = "unsw_nb15"
+task = "multiclass"
+train_path = "data/raw/UNSW_NB15_training-set.csv"
+test_path = "data/raw/UNSW_NB15_testing-set.csv"
+validation_size = 0.15
+apply_smote = false
+smote_method = "none"
+split_indices_path = "data/processed/splits/multiclass_stratified_seed42_val015.npz"
+log_transform = true
+save_preprocessor = true
+preprocessor_path = "data/processed/preprocessors/multiclass_preprocessor.joblib"
+
+[model]
+name = "feature_ms_cnn_bilstm_attention"
+conv_channels = 32
+kernel_sizes = [3, 5, 7]
+lstm_hidden = 96
+lstm_layers = 1
+attention_heads = 4
+dense_hidden = 64
+dropout = 0.35
+
+[training]
+epochs = 45
+batch_size = 128
+learning_rate = 0.001
+weight_decay = 0.00001
+optimizer = "adam"
+loss = "cross_entropy"
+validation_selection_metric = "accuracy"
+early_stopping_patience = 9

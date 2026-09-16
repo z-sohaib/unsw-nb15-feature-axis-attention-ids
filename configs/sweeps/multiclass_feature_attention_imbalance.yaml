@@ -1,0 +1,61 @@
+program: scripts/run_wandb_trial.py
+method: bayes
+metric:
+  name: test_macro_f1
+  goal: maximize
+early_terminate:
+  type: hyperband
+  min_iter: 10
+command:
+  - ${env}
+  - ".venv\\Scripts\\python.exe"
+  - ${program}
+  - --base-config
+  - configs/multiclass_feature_attention_smotenc_eql.toml
+  - --group
+  - unsw_multiclass_feature_attention_imbalance
+  - ${args}
+parameters:
+  experiment.seed:
+    value: 42
+  data.smote_profile:
+    values: [none, global_3000, global_6000, perclass_conservative, perclass_moderate]
+  training.epochs:
+    value: 60
+  training.early_stopping_patience:
+    values: [9, 12]
+  training.validation_selection_metric:
+    values: [macro_f1, weighted_f1]
+  training.optimizer:
+    values: [adam, adamw]
+  training.loss:
+    values: [eql_v2, class_balanced_focal, weighted_cross_entropy, balanced_softmax]
+  training.batch_size:
+    values: [64, 128]
+  training.learning_rate:
+    distribution: log_uniform_values
+    min: 0.0001
+    max: 0.002
+  training.weight_decay:
+    distribution: log_uniform_values
+    min: 0.000001
+    max: 0.001
+  model.conv_channels:
+    values: [24, 32, 48]
+  model.lstm_hidden:
+    values: [64, 96, 128]
+  model.lstm_layers:
+    values: [1, 2]
+  model.attention_heads:
+    values: [2, 4, 8]
+  model.dense_hidden:
+    values: [64, 96, 128]
+  model.dropout:
+    distribution: uniform
+    min: 0.20
+    max: 0.45
+  model.kernel_sizes:
+    values:
+      - [3, 5, 7]
+      - [3, 5]
+      - [3, 7, 9]

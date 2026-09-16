@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "unsw-nb15-ids"
+version = "0.1.0"
+description = "UNSW-NB15 intrusion detection experiments for the thesis."
+requires-python = ">=3.12"
+dependencies = [
+    "imbalanced-learn>=0.12",
+    "joblib>=1.5",
+    "matplotlib>=3.9",
+    "nvidia-ml-py>=12.560",
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "scikit-learn>=1.5",
+    "seaborn>=0.13",
+    "torch>=2.3",
+    "tqdm>=4.66",
+    "wandb>=0.17",
+]
+
+[project.scripts]
+unsw-aggregate-results = "unsw_nb15_ids.aggregate_results:main"
+unsw-multiclass-report = "unsw_nb15_ids.multiclass_report:main"
+unsw-validate-preprocessing = "unsw_nb15_ids.preprocessing_validation:main"
+unsw-profile = "unsw_nb15_ids.profile:main"
+unsw-train = "unsw_nb15_ids.train:main"
+
+[project.optional-dependencies]
+gpu = [
+    "nvidia-ml-py>=12.560",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

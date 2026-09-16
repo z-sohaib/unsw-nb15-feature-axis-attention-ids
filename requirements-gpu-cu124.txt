@@ -1,0 +1,14 @@
+# CUDA-enabled PyTorch install for NVIDIA GPUs.
+#
+# Use this after activating the project virtual environment. The normal project
+# dependencies are in requirements.txt / pyproject.toml; this file is only for
+# replacing or installing PyTorch from the official CUDA 12.4 wheel index.
+#
+# Command:
+#   py -m pip install --upgrade --force-reinstall -r requirements-gpu-cu124.txt
+#
+# If your NVIDIA driver supports a newer CUDA wheel, prefer the command shown by
+# the official PyTorch selector: https://docs.pytorch.org/get-started/locally/
+
+--index-url https://download.pytorch.org/whl/cu124
+torch>=2.3

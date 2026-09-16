@@ -1,0 +1,40 @@
+[experiment]
+name = "unsw_nb15_multiclass_ft_transformer"
+seed = 42
+output_dir = "runs/multiclass_ft_transformer"
+
+[data]
+dataset = "unsw_nb15"
+task = "multiclass"
+train_path = "data/raw/UNSW_NB15_training-set.csv"
+test_path = "data/raw/UNSW_NB15_testing-set.csv"
+validation_size = 0.15
+apply_smote = false
+smote_method = "none"
+split_indices_path = "data/processed/splits/multiclass_stratified_seed42_val015.npz"
+log_transform = true
+save_preprocessor = true
+preprocessor_path = "data/processed/preprocessors/multiclass_preprocessor.joblib"
+
+[model]
+name = "ft_transformer"
+conv_channels = 32
+kernel_sizes = [3, 5, 7]
+lstm_hidden = 96
+lstm_layers = 1
+attention_heads = 4
+dense_hidden = 192
+dropout = 0.20
+transformer_dim = 96
+transformer_layers = 2
+
+[training]
+epochs = 45
+batch_size = 256
+learning_rate = 0.001
+weight_decay = 0.0001
+optimizer = "adamw"
+loss = "cross_entropy"
+early_stopping_patience = 10
+label_smoothing = 0.05
+validation_selection_metric = "macro_f1"
