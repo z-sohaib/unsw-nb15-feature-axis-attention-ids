@@ -194,11 +194,3 @@ Do not commit:
 - generated cache files.
 
 Keep source code, configs, research notes, and Markdown reports under version control.
-
-## Suggested Repository Names
-
-- `unsw-nb15-feature-axis-attention-ids`
-- `unsw-nb15-deep-ids-benchmark`
-- `unsw-nb15-multiclass-dl-ids`
-
-Recommended: `unsw-nb15-feature-axis-attention-ids`
