@@ -37,7 +37,6 @@ The dataset is not tracked by Git. Keep raw and processed data local.
   configs/                  Experiment configurations.
     sweeps/                 W&B sweep definitions.
   data/                     Local raw and processed data, ignored by Git.
-  plan/                     Research plans, phase notes, and result summaries.
   reports/                  Human-readable progress reports and figures.
   runs/                     Local experiment outputs, ignored by Git.
   scripts/                  Setup checks, utilities, and W&B helpers.
